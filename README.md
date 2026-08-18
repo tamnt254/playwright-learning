@@ -1,3 +1,4 @@
+![CI](https://github.com/tamnt254/playwright-learning/actions/workflows/playwright.yml/badge.svg)
 # Playwright Test Automation Framework
 
 An end-to-end test automation framework built with **Playwright** and **TypeScript**, demonstrating modern QA engineering practices including Page Object Model, custom fixtures, API testing, and CI/CD integration.
