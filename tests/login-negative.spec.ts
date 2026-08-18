@@ -1,4 +1,5 @@
 import {test, expect} from '@playwright/test';
+import invalidCredentialsFromFile from './data/invalid-credentials.json';
 
 //Negative test 1: login with wrong credential
 test('login with wrong credentials show error', async({page}) => {
@@ -19,6 +20,17 @@ const invalidCredentials = [
 
 for (const { username, password, label } of invalidCredentials) {
     test(`login fails: ${label}`, async({page}) => {
+        await page.goto('https://demoqa.com/login');
+        await page.getByPlaceholder('Username').fill(username);
+        await page.getByPlaceholder('Password').fill(password);
+        await page.getByRole('button', {name: 'Login'}).click();
+        await expect(page.getByText('Invalid username or password!')).toBeVisible();
+
+    });
+}
+
+for (const { username, password, label } of invalidCredentialsFromFile) {
+    test(`login fails with data from file: ${label}`, async({page}) => {
         await page.goto('https://demoqa.com/login');
         await page.getByPlaceholder('Username').fill(username);
         await page.getByPlaceholder('Password').fill(password);
