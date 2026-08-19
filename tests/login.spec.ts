@@ -1,12 +1,12 @@
 import {test, expect} from '@playwright/test';
 
-test('login page has correct title', async ({page}) => {
+test('login page has correct title @regression @smoke', async ({page}) => {
     await page.goto('https://demoqa.com/login');
     await expect(page).toHaveTitle('demosite');
 });
 
 
-test('login page has username and password fields', async({page}) => {
+test('login page has username and password fields @regression @smoke', async({page}) => {
     await page.goto('https://demoqa.com/login');
     await expect(page.getByPlaceholder('Username')).toBeVisible();
     await expect(page.getByPlaceholder('Password')).toBeVisible();
@@ -15,7 +15,7 @@ test('login page has username and password fields', async({page}) => {
 
 
 
-test('practice locators', async({page}) => {
+test('practice locators @regression', async({page}) => {
     await page.goto('https://demoqa.com/login');
     //getByPlaceholder
     const usernameField = page.getByPlaceholder('UserName');
@@ -30,7 +30,7 @@ test('practice locators', async({page}) => {
 });
 
 
-test('fill and submit login form', async({page}) => {
+test('fill and submit login form @regression @smoke', async({page}) => {
     await page.goto('https://demoqa.com/login');
     await page.getByPlaceholder('UserName').fill('testuser');
     await page.getByPlaceholder('Password').fill('Test@1234');
@@ -41,7 +41,7 @@ test('fill and submit login form', async({page}) => {
 });
 
 
-test('assert form element state', async({page}) => {
+test('assert form element state @regression', async({page}) => {
     await page.goto('https://demoqa.com/login');
     //Button enabled
     await expect(page.getByRole('button', {name: 'Login'})).toBeEnabled();
