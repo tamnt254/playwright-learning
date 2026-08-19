@@ -1,8 +1,9 @@
 import {test, expect} from '@playwright/test';
 import invalidCredentialsFromFile from './data/invalid-credentials.json';
+import {USERS, MESSAGES} from './constants';
 
 //Negative test 1: login with wrong credential
-test('login with wrong credentials show error @regression', async({page}) => {
+test('login with wrong credentials show error -harcoded @regression', async({page}) => {
     await page.goto('https://demoqa.com/login');
     await page.getByPlaceholder('Username').fill('wronguser');
     await page.getByPlaceholder('Password').fill('wrongpass');
@@ -39,3 +40,12 @@ for (const { username, password, label } of invalidCredentialsFromFile) {
 
     });
 }
+
+
+test('login with wrong credentials show error @regression', async({page})=> {
+    await page.goto('/login');
+    await page.getByPlaceholder('Username').fill(USERS.invalid.username);
+    await page.getByPlaceholder('Password').fill(USERS.invalid.password);
+    await page.getByRole('button', {name:'Login'}).click();
+    await expect(page.getByText(MESSAGES.invalidCredentials)).toBeVisible();
+});
